@@ -8,6 +8,10 @@ function moduleProject1() {
 
   const divs = document.querySelectorAll('section div');
   divs.forEach(div => div.classList.add('widget'));
+  const widgets = document.querySelectorAll('.widget');
+  widgets.forEach((widget, index) => 
+    widget.setAttribute('tabindex', `${index + 1}`)
+  )
 
   // 👉 TASK 2 - Build a "Quote of the Day" widget
 
@@ -18,7 +22,7 @@ function moduleProject1() {
 
   const quote = randomQuote.quote;
   const author = randomQuote.author;
-  const date = randomQuote.date === null ? 'an uknown date' : randomQuote.date;
+  const date = randomQuote.date === null ? 'an unknown date' : randomQuote.date;
 
   quoteText.textContent = quote;
   quoteAuthor.textContent = `${author} in ${date}`;
@@ -51,13 +55,13 @@ function moduleProject1() {
 
   countdownWidget.appendChild(countdownText);
 
-  countdownText.textContent = 'T-Minus 5...';
+  countdownText.textContent = 'T-minus 5...';
 
-  let count = 5;
+  let count = 4;
 
   setInterval(function() {
     if (count > 0) {
-      countdownText.textContent = `T-Minus ${count}...`;
+      countdownText.textContent = `T-minus ${count}...`;
       count--;
     }
     else {
@@ -66,15 +70,45 @@ function moduleProject1() {
     }
   }, 1000);
 
-  
-  
-
-
   // 👉 TASK 5 - Build a "Friends" widget
-  //  ✨ add your code here
+
+  const friendsWidget = document.querySelector('.friends');
+  const friendsText = document.createElement('p');
+
+  const randomPerson = people[Math.floor(Math.random() * people.length)];
+  const name = `${randomPerson.fname} ${randomPerson.lname}`;
+  const birthYear = randomPerson.dateOfBirth.slice(0, 4);
+  const friendIDs = randomPerson.friends;
+  const friendNames = friendIDs.length ? [] : false;
+
+  if (friendNames) {
+    friendIDs.forEach(id => {
+      for (let i = 0; i < people.length; i++) {
+        if (people[i].id === id) {
+          friendNames.push(`${people[i].fname} ${people[i].lname}`);
+        }
+      }
+    })
+    friendNames.forEach((name, idx) => {
+      if (idx === friendNames.length - 1) friendNames[idx] = `${name}.`;
+      else if (idx === friendNames.length - 2) friendNames[idx] = `${name} and`;
+      else friendNames[idx] = `${name},`;
+    })
+  }
+
+  const friendString = friendNames
+    ? 'is friends with ' + friendNames.join(' ')
+    : 'has no friends.';
+
+  friendsText.textContent = `${name} was born in ${birthYear} and ${friendString}`;
+  
+  friendsWidget.appendChild(friendsText);
 
   // 👉 TASK 6 - Make it so user can tab through the widgets
-  //  ✨ add your code here
+
+
+  // Luis Gonzalez was born in 1990 and has no friends.
+
 
   // 👆 WORK WORK ABOVE THIS LINE 👆
 }
