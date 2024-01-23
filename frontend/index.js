@@ -29,10 +29,46 @@ function moduleProject1() {
   // 👉 TASK 3 - Build a "Corporate Speak" widget
   
   const corporateWidget = document.querySelector('.corporatespeak');
+  const corporateText = document.createElement('p');
+
+  const verb1 = verbs[Math.floor(Math.random() * verbs.length)];
+  const verb2 = verbs[Math.floor(Math.random() * verbs.length)];
+  const noun1 = nouns[Math.floor(Math.random() * nouns.length)];
+  const noun2 = nouns[Math.floor(Math.random() * nouns.length)];
+  const adverb1 = adverbs[Math.floor(Math.random() * adverbs.length)];
+  const adverb2 = adverbs[Math.floor(Math.random() * adverbs.length)];
+
+  const textTemplate = `We need to ${verb1} our ${noun1} ${adverb1} in order to ${verb2} our ${noun2} ${adverb2}.`;
+
+  corporateText.textContent = textTemplate;
+  
+  corporateWidget.appendChild(corporateText);
+  
+  // 👉 TASK 4 - Build a "Countdown" widget
+  
+  const countdownWidget = document.querySelector('.countdown');
+  const countdownText = document.createElement('p');
+
+  countdownWidget.appendChild(countdownText);
+
+  countdownText.textContent = 'T-Minus 5...';
+
+  let count = 5;
+
+  setInterval(function() {
+    if (count > 0) {
+      countdownText.textContent = `T-Minus ${count}...`;
+      count--;
+    }
+    else {
+      countdownText.textContent = 'Liftoff! 🚀';
+      clearInterval(this);
+    }
+  }, 1000);
+
+  
   
 
-  // 👉 TASK 4 - Build a "Countdown" widget
-  //  ✨ add your code here
 
   // 👉 TASK 5 - Build a "Friends" widget
   //  ✨ add your code here
